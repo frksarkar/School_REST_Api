@@ -1,11 +1,9 @@
-const express = require('express');
-const morgan = require('morgan');
+const http = require('http');
+const { app } = require('./app/app');
 
-const app = express();
 const PORT = process.env.PORT || 3000;
- 
-app.use(morgan('dev'));
+const server = http.createServer(app);
 
-app.listen(PORT, (result) => {
+server.listen(PORT, (result) => {
 	console.log('server listening on port ', PORT);
 });
