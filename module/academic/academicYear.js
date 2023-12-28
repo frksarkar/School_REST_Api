@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose;
+const { Schema } = mongoose;
 
-const AcademicYear = new Schema(
+const academicYearSchema = new Schema(
 	{
 		name: {
 			type: String,
@@ -43,4 +43,4 @@ const AcademicYear = new Schema(
 	}
 );
 
-exports.AcademicYear = AcademicYear;
+exports.AcademicYear = mongoose.model('AcademicYear', academicYearSchema);
