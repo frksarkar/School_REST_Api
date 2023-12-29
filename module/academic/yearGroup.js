@@ -24,4 +24,4 @@ const yearGroupSchema = new Schema(
 	}
 );
 
-exports.YearGroup = mongoose.model('yearGroup', yearGroupSchema);
+exports.YearGroup = mongoose.model('YearGroup', yearGroupSchema);
