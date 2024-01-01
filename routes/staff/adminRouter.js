@@ -14,7 +14,7 @@ const {
 	adminPublishExam,
 	adminUnPublishExam,
 } = require('../../controller/staff/adminController');
-const { isLoggedIn } = require('../../middlewares/authHandler');
+const { isLoggedIn, isAdmin } = require('../../middlewares/authHandler');
 
 const adminRouter = express.Router();
 
@@ -25,13 +25,13 @@ adminRouter.post('/register', adminRegister);
 adminRouter.post('/login', adminLogin);
 
 // get all admins
-adminRouter.get('/', getAdmins);
+adminRouter.get('/', isLoggedIn, getAdmins);
 
 // get single admin
-adminRouter.get('/profile',isLoggedIn, getAdmin);
+adminRouter.get('/profile', isLoggedIn, isAdmin, getAdmin);
 
 // update admin
-adminRouter.put('/:id', updateAdmin);
+adminRouter.put('/', isLoggedIn, isAdmin, updateAdmin);
 
 // delete single admin
 adminRouter.delete('/:id', deleteAdmin);
