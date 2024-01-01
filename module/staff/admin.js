@@ -7,6 +7,17 @@ const adminSchema = new mongoose.Schema(
 		email: { type: String, required: true },
 		password: { type: String, required: true },
 		role: { type: String, default: 'admin' },
+		academicTerms: [
+			{ type: mongoose.Schema.Types.ObjectId, ref: 'AcademicTerms' },
+		],
+		academicYear: [
+			{ type: mongoose.Schema.Types.ObjectId, ref: 'AcademicYear' },
+		],
+		classLevels: [
+			{ type: mongoose.Schema.Types.ObjectId, ref: 'ClassLevel' },
+		],
+		teachers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' }],
+		students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
 	},
 	{
 		timestamps: true,
@@ -14,10 +25,17 @@ const adminSchema = new mongoose.Schema(
 );
 
 adminSchema.pre('save', async function (next) {
-	console.log(this.isModified());
 
 	const passwordHash = await bcrypt.hash(this.password, 12);
 	this.password = passwordHash;
+
+	next();
+});
+
+adminSchema.pre('findOneAndUpdate', async function (next) {
+
+	const passwordHash = await bcrypt.hash(this._update.password, 12);
+	this._update.password = passwordHash;
 
 	next();
 });
