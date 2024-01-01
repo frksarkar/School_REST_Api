@@ -67,13 +67,10 @@ exports.getAdmins = async function (req, res, next) {
 
 exports.getAdmin = async function (req, res, next) {
 	try {
-		const user = await Admin.findOne(req.user._id).select(
-			'name email role'
-		);
 		res.status(200).json({
 			status: 'success',
 			message: 'get admin',
-			data: user,
+			data: req.user,
 		});
 	} catch (error) {
 		next(error);
@@ -81,9 +78,12 @@ exports.getAdmin = async function (req, res, next) {
 };
 
 exports.updateAdmin = async function (req, res, next) {
-	const { email, password } = req.body;
+	const { name, email, password } = req.body;
 	try {
-		const user = await Admin.updateOne({ email }, { password });
+		const user = await Admin.findOneAndUpdate(
+			{ _id: req.user._id },
+			{ name, password, email },
+		);
 		console.log('🚀 ~ file: adminController.js:58 ~ user:', user);
 
 		res.status(202).json({
