@@ -3,6 +3,7 @@ const express = require('express');
 
 const { adminRouter } = require('../routes/staff/adminRouter');
 const { errorHandler, notFound } = require('../middlewares/errorHandler');
+const { academicYearRouter } = require('../routes/academic/academicYearRouter');
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json()); // incoming request body
 // Router middleware
 //admin routes
 app.use('/api/v1/admins', adminRouter);
+app.use('/api/v1/academic-years', academicYearRouter)
 
 // not found
 app.use(notFound);
