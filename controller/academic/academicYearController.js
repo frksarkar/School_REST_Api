@@ -1,5 +1,6 @@
 const { throwErr } = require('../../middlewares/errorHandler');
 const { AcademicYear } = require('../../module/academic/academicYear');
+const { Admin } = require('../../module/staff/admin');
 
 exports.createAcademicYear = async function (req, res, next) {
 	const { name, fromYear, toYear } = req.body;
@@ -21,6 +22,14 @@ exports.createAcademicYear = async function (req, res, next) {
 			toYear,
 			createdBy,
 		});
+
+		// add academic year object id into to admin object
+		if (createdAcademicYear) {
+			const user = await Admin.findById(createdBy);
+			user.academicYear.push(createdAcademicYear);
+			user.save();
+		}
+
 		// send response
 		res.json({
 			status: 'success',
@@ -50,6 +59,9 @@ exports.getAcademicYear = async function (req, res, next) {
 	const academicYearId = req.params.id;
 	try {
 		const academicData = await AcademicYear.findById(academicYearId);
+		if (!academicData) {
+			throwErr('user id not valid', 400);
+		}
 		// send response
 		res.json({
 			status: 'success',
@@ -66,6 +78,10 @@ exports.updateAcademicYear = async function (req, res, next) {
 	const { name, fromYear, toYear } = req.body;
 	try {
 		const existAcademicYear = await AcademicYear.findById(academicYearId);
+		// provided valid academic year id
+		if (!existAcademicYear) {
+			throwErr('provided valid academic year id', 403);
+		}
 		// if any one filed data aren't exist
 		if (name || fromYear || toYear) {
 			if (name) {
@@ -81,10 +97,7 @@ exports.updateAcademicYear = async function (req, res, next) {
 		} else {
 			throwErr('provided only one field data', 403);
 		}
-		// provided valid academic year id
-		if (!existAcademicYear) {
-			throwErr('provided valid academic year id', 403);
-		}
+		
 
 		// send response
 		res.json({
@@ -99,15 +112,23 @@ exports.updateAcademicYear = async function (req, res, next) {
 
 exports.deleteAcademicYear = async function (req, res, next) {
 	const academicYearId = req.params.id;
+	const userId = req.user._id;
 	try {
-		const academicData = await AcademicYear.deleteOne(academicYearId);
+		const academicData = await AcademicYear.findByIdAndDelete(
+			academicYearId
+		);
+
+		if (academicData) {
+			await Admin.findByIdAndUpdate(userId, {
+				$pull: { academicYear: academicYearId },
+			});
+		}
+
 		// send response
 		res.json({
 			status: 'success',
 			message: 'deleted successfully academic year data',
-			data: academicData,
 		});
-        
 	} catch (error) {
 		next(error);
 	}
