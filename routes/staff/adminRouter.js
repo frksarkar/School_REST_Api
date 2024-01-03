@@ -24,17 +24,12 @@ adminRouter.post('/register', adminRegister);
 // login admin
 adminRouter.post('/login', adminLogin);
 
-// get all admins
-adminRouter.get('/', isLoggedIn, getAdmins);
-
-// get single admin
-adminRouter.get('/profile', isLoggedIn, isAdmin, getAdmin);
-
-// update admin
-adminRouter.put('/', isLoggedIn, isAdmin, updateAdmin);
-
-// delete single admin
-adminRouter.delete('/:id', deleteAdmin);
+adminRouter
+	.use(isLoggedIn, isAdmin)
+	.get('/', getAdmins) // get all admins
+	.get('/profile', getAdmin) // get single admin
+	.put('/', updateAdmin) // update admin
+	.delete('/:id', deleteAdmin); // delete single admin
 
 // admin suspend teacher
 adminRouter.put('/suspend/teacher/:id', adminSuspendTeacher);
