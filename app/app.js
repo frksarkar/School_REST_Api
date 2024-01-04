@@ -7,7 +7,9 @@ const { academicYearRouter } = require('../routes/academic/academicYearRouter');
 const {
 	academicTermRouter,
 } = require('../routes/academic/academicTermRouter ');
-const { classLevelRouter } = require('../routes/academic/classLevel');
+const { classLevelRouter } = require('../routes/academic/classLevelRouter');
+const { programRouter } = require('../routes/academic/programRouter');
+const { subjectRouter } = require('../routes/academic/subjectRouter');
 
 const app = express();
 
@@ -21,6 +23,8 @@ app.use('/api/v1/admins', adminRouter);
 app.use('/api/v1/academic-years', academicYearRouter);
 app.use('/api/v1/academic-terms', academicTermRouter);
 app.use('/api/v1/class-levels', classLevelRouter);
+app.use('/api/v1/programs', programRouter);
+app.use('/api/v1/subjects', subjectRouter);
 
 // not found
 app.use(notFound);
