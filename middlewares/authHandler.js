@@ -1,33 +1,76 @@
 const { verifyToken } = require('../utils/helper');
 const { Admin } = require('../module/staff/admin');
+const { Teacher } = require('../module/staff/teacher');
+const { throwErr } = require('./errorHandler');
 
 exports.isLoggedIn = function (req, res, next) {
-	// get token from header
-	const token = req.headers?.authorization?.split(' ')[1];
-
-	// token verify
-	const isValidUser = verifyToken(token);
-	if (!isValidUser) {
-		const error = new Error('invalid authorization token');
-		error.statusCode = 401;
-		``;
+	try {
+		// get token from header
+		const token = req.headers?.authorization?.split(' ')[1];
+		// token verify
+		const isValidUser = verifyToken(token);
+		if (!isValidUser) {
+			throwErr('invalid authorization token', 401);
+		}
+		// save the token into req.obj
+		req.user = isValidUser;
+		next();
+	} catch (error) {
 		next(error);
 	}
-
-	// save the token into req.obj
-	req.user = isValidUser;
-	next();
 };
 
 exports.isAdmin = async function (req, res, next) {
-	// find the user in the database
-	const userId = req.user._id;
-	const adminData = await Admin.findOne(userId).select('-password');
-
-	// check if the user is exist then send the user into req.obj
-	if (!adminData?.role === 'admin') {
-		next('Access denied, admin can access only');
+	try {
+		// find the user in the database
+		const userId = req?.user?.id;
+		const adminData = await Admin.findById(userId).select('-password');
+		if (!adminData) {
+			throwErr('login failed', 400);
+		}
+		// check if the user is exist then send the user into req.obj
+		if (!adminData?.role === 'admin') {
+			throwErr('Access denied, admin can access only', 400);
+		}
+		req.user = adminData;
+		next();
+	} catch (error) {
+		next(error);
 	}
-	req.user = adminData;
-	next();
+};
+
+exports.isLoginTeacher = function (req, res, next) {
+	try {
+		// get token from header
+		const token = req.headers?.authorization?.split(' ')[1];
+		// token verify
+		const isValidUser = verifyToken(token);
+		if (!isValidUser) {
+			throwErr('invalid authorization token', 401);
+		}
+		// save the token into req.obj
+		req.user = isValidUser;
+		next();
+	} catch (error) {
+		next(error);
+	}
+};
+
+exports.isTeacher = async function (req, res, next) {
+	try {
+		// find the user in the database
+		const userId = req?.user?.id;
+		const teacherData = await Teacher.findById(userId).select('-password');
+		if (!teacherData) {
+			throwErr('login failed', 400);
+		}
+		// check if the user is exist then send the user into req.obj
+		if (!teacherData?.role === 'teacher') {
+			throwErr('Access denied, teacher can access only', 400);
+		}
+		req.user = teacherData;
+		next();
+	} catch (error) {
+		next(error);
+	}
 };
