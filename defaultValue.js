@@ -1,6 +1,7 @@
 exports.defaultValue = {
 	jwtSecret: 'LMSjwtPrivateKey',
-	jwtExpiration: '1d',
+	adminJwtExpiration: '1d',
+	teacherJwtExpiration: '1d',
 	PORT: 3000,
 	TestDatabase: 'demo link',
 };
