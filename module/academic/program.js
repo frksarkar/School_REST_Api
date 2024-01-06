@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose;
+const { defaultAppValue } = require('../../defaultValue');
+const { Schema } = mongoose;
 
 const programSchema = new Schema(
 	{
@@ -14,7 +15,7 @@ const programSchema = new Schema(
 		duration: {
 			type: String,
 			required: true,
-			default: '4 years',
+			default: defaultAppValue.programDuration,
 		},
 		code: {
 			type: String,

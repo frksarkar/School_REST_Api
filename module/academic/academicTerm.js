@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { defaultAppValue } = require('../../defaultValue');
 
 const { Schema } = mongoose;
 
@@ -15,7 +16,7 @@ const academicTermSchema = new Schema(
 		duration: {
 			type: String,
 			required: true,
-			default: '3 months',
+			default: defaultAppValue.academicTermDuration,
 		},
 		createdBy: {
 			type: Schema.Types.ObjectId,

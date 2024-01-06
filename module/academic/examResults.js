@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { defaultAppValue } = require('../../defaultValue');
 
 const { Schema } = mongoose;
 
@@ -30,42 +31,41 @@ const examResultSchema = new Schema(
 		status: {
 			type: String,
 			required: true,
-			enum: ['failed', 'passed'],
+			enum: defaultAppValue.examStatusEnumVal,
 			default: 'failed',
 		},
 		remarks: {
 			type: String,
 			required: true,
-			enum: ['Excellent', 'Good', 'Poor'],
+			enum: defaultAppValue.examResultEnumVal,
 			default: 'Poor',
 		},
 		position: {
 			type: Number,
 			required: true,
 		},
-        subject: {
-            type: Schema.Types.ObjectId,
-            ref: 'Subject',
-        }
-        ,
-        classLevel: {
-            type: Schema.Types.ObjectId,
-            ref: 'ClassLevel',
-        },
-        academicTerm: {
-            type: Schema.Types.ObjectId,
-            ref: 'AcademicTerm',
-            required: true,
-        },
-        academicYear: {
-            type: Schema.Types.ObjectId,
-            ref: 'AcademicYear',
-            required: true,
-        },
-        isPublished: {
-            type: Boolean,
-            default: false,
-        }
+		subject: {
+			type: Schema.Types.ObjectId,
+			ref: 'Subject',
+		},
+		classLevel: {
+			type: Schema.Types.ObjectId,
+			ref: 'ClassLevel',
+		},
+		academicTerm: {
+			type: Schema.Types.ObjectId,
+			ref: 'AcademicTerm',
+			required: true,
+		},
+		academicYear: {
+			type: Schema.Types.ObjectId,
+			ref: 'AcademicYear',
+			required: true,
+		},
+		isPublished: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	{
 		timestamps: true,

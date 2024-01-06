@@ -37,6 +37,8 @@ const academicYearSchema = new Schema(
 				ref: 'Teacher',
 			},
 		],
+		// financial information
+		// librarian information
 	},
 	{
 		timestamps: true,

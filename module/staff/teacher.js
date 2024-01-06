@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const { defaultAppValue } = require('../../defaultValue');
+const { passwordEncrypt, isValidPassword } = require('../../utils/helper');
 
 const { Schema } = mongoose;
 
@@ -16,6 +18,14 @@ const teacherSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		role: {
+			type: String,
+			default: 'teacher',
+		},
+		dateEmployed: {
+			type: Date,
+			default: Date.now,
+		},
 		isWithdraw: {
 			type: Boolean,
 			default: false,
@@ -24,34 +34,31 @@ const teacherSchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
-		role: {
-			type: String,
-			default: 'teacher',
-		},
+
 		subject: {
 			type: Schema.Types.ObjectId,
 			ref: 'Subject',
-			required: true,
+			// required: true,
 		},
 		applicationStatus: {
 			type: String,
-			enum: ['pending', 'approved', 'rejected'],
+			enum: defaultAppValue.teacherApplicationStatusEnumVal,
 			default: 'pending',
 		},
 		program: {
 			type: Schema.Types.ObjectId,
 			ref: 'Program',
-			required: true,
+			// required: true,
 		},
 		classLevel: {
 			type: Schema.Types.ObjectId,
 			ref: 'ClassLevel',
-			required: true,
+			// required: true,
 		},
 		academicYear: {
 			type: Schema.Types.ObjectId,
 			ref: 'AcademicYear',
-			required: true,
+			// required: true,
 		},
 		examsCreated: [
 			{
@@ -62,7 +69,7 @@ const teacherSchema = new Schema(
 		academicTerm: {
 			type: Schema.Types.ObjectId,
 			ref: 'AcademicTerm',
-			required: true,
+			// required: true,
 		},
 		createdBy: {
 			type: Schema.Types.ObjectId,
@@ -74,5 +81,9 @@ const teacherSchema = new Schema(
 		timestamps: true,
 	}
 );
+
+teacherSchema.pre('save', passwordEncrypt);
+
+teacherSchema.methods.verifyPassword = isValidPassword;
 
 exports.Teacher = mongoose.model('Teacher', teacherSchema);
