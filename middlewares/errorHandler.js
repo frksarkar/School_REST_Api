@@ -14,3 +14,10 @@ exports.errorHandler = function (err, req, res, next) {
 exports.notFound = function (req, res, next) {
 	res.status(404).json({ message: 'page not found' });
 };
+
+// error throw function
+exports.throwErr = function (message, statusCode) {
+	const error = new Error(message);
+	error.statusCode = statusCode;
+	throw error;
+};
