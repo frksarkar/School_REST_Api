@@ -125,10 +125,11 @@ exports.updateAdmin = async function (req, res, next) {
 exports.deleteAdmin = function (req, res, next) {
 	try {
 		res.status(200).json({
+			status: 'success',
 			message: 'delete admin successful',
 		});
 	} catch (error) {
-		console.log(error.message);
+		next(error);
 	}
 };
 

@@ -4,7 +4,7 @@ const { Admin } = require('../../module/staff/admin');
 const { Teacher } = require('../../module/staff/teacher');
 const { tokenGenerate } = require('../../utils/helper');
 
-exports.teacherRegister = async function (req, res, next) {
+exports.adminTeacherRegister = async function (req, res, next) {
 	const { name, email, password } = req.body;
 	const createdBy = req.user._id;
 
@@ -70,7 +70,7 @@ exports.teacherLogin = async function (req, res, next) {
 	}
 };
 
-exports.getTeachers = async function (req, res, next) {
+exports.AdminGetTeachers = async function (req, res, next) {
 	try {
 		const users = await Teacher.find().select('-password');
 		res.status(200).json({
@@ -83,7 +83,7 @@ exports.getTeachers = async function (req, res, next) {
 	}
 };
 
-exports.getTeacher = async function (req, res, next) {
+exports.AdminGetTeacher = async function (req, res, next) {
 	try {
 		res.status(200).json({
 			status: 'success',
@@ -95,11 +95,16 @@ exports.getTeacher = async function (req, res, next) {
 	}
 };
 
-exports.updateTeacher = async function (req, res, next) {
+exports.adminUpdateTeacher = async function (req, res, next) {
 	const { name, email, password } = req.body;
-	try {
+	const teacherId = req.params.teacherId;
+	try { 
 		// find email and throw error if email already exists
+		const teacherObj = await Teacher.findOne({ teacherId });
 		const emailExist = await Teacher.findOne({ email });
+		if (teacherObj.isWithdraw) {
+			throwErr("can't access, teacher is withdrawn", 403);
+		}
 		if (emailExist) {
 			throwErr('email already exists', 403);
 		}
@@ -117,7 +122,7 @@ exports.updateTeacher = async function (req, res, next) {
 			}
 			user.save();
 		} else {
-			throwErr('provided atlas, one field value', 200);
+			throwErr('provided at least, one field value', 200);
 		}
 		// send back to the response object.
 		res.status(202).json({
@@ -129,13 +134,23 @@ exports.updateTeacher = async function (req, res, next) {
 	}
 };
 
-exports.deleteTeacher = function (req, res, next) {
+exports.adminDeleteTeacher = async function (req, res, next) {
+	const userId = req.user._id;
+	const teacherId = req.params.teacherId;
 	try {
+		const teacherData = await Teacher.findByIdAndDelete(teacherId);
+		if (!teacherData) {
+			throwErr('provide valid teacher id', 400);
+		}
+		await Admin.findByIdAndUpdate(userId, {
+			$pull: { teachers: teacherId },
+		});
 		res.status(200).json({
+			status: 'success',
 			message: 'delete teacher successful',
 		});
 	} catch (error) {
-		console.log(error.message);
+		next(error);
 	}
 };
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { defaultAppValue } = require('../../defaultValue');
 
 const { Schema } = mongoose;
 
@@ -11,6 +12,11 @@ const subjectSchema = new Schema(
 		description: {
 			type: String,
 			required: true,
+		},
+		duration: {
+			type: String,
+			required: true,
+			default: defaultAppValue.subjectDuration,
 		},
 		teacher: {
 			type: Schema.Types.ObjectId,
@@ -25,11 +31,6 @@ const subjectSchema = new Schema(
 			type: Schema.Types.ObjectId,
 			ref: 'Admin',
 			required: true,
-		},
-		duration: {
-			type: String,
-			required: true,
-			default: '3 months',
 		},
 	},
 	{ timestamps: true }

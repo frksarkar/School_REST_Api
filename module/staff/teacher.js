@@ -22,6 +22,22 @@ const teacherSchema = new Schema(
 			type: String,
 			default: 'teacher',
 		},
+		teacherId: {
+			type: String,
+			required: true,
+			default: function () {
+				return (
+					'TEA' +
+					Math.floor(100 + Math.random() * 900) +
+					Date.now().toString().slice(2, 4) +
+					this.name
+						.split(' ')
+						.map((name) => name[0])
+						.join('')
+						.toUpperCase()
+				);
+			},
+		},
 		dateEmployed: {
 			type: Date,
 			default: Date.now,
@@ -45,32 +61,16 @@ const teacherSchema = new Schema(
 			enum: defaultAppValue.teacherApplicationStatusEnumVal,
 			default: 'pending',
 		},
-		program: {
-			type: Schema.Types.ObjectId,
-			ref: 'Program',
-			// required: true,
-		},
-		classLevel: {
-			type: Schema.Types.ObjectId,
-			ref: 'ClassLevel',
-			// required: true,
-		},
-		academicYear: {
-			type: Schema.Types.ObjectId,
-			ref: 'AcademicYear',
-			// required: true,
-		},
+		program: String,
+		classLevel: String,
+		academicYear: String,
+		academicTerm: String,
 		examsCreated: [
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Exam',
 			},
 		],
-		academicTerm: {
-			type: Schema.Types.ObjectId,
-			ref: 'AcademicTerm',
-			// required: true,
-		},
 		createdBy: {
 			type: Schema.Types.ObjectId,
 			ref: 'Admin',
