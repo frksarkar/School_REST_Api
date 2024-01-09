@@ -10,12 +10,15 @@ const { yearGroupRouter } = require('../routes/academic/yearGroupRouter');
 const { classLevelRouter } = require('../routes/academic/classLevelRouter');
 const { academicYearRouter } = require('../routes/academic/academicYearRouter');
 const { academicTermRouter } = require('../routes/academic/academicTermRouter ');
+const { examRouter } = require('../routes/academic/examRouter');
+const { defaultHandler } = require('../middlewares/defaultHandler');
 
 const app = express();
 
 // add middleware
 app.use(morgan('dev'));
 app.use(express.json()); // incoming request body
+app.use(defaultHandler) // set default value
 
 // Router middleware
 //admin routes
@@ -27,6 +30,7 @@ app.use('/api/v1/programs', programRouter);
 app.use('/api/v1/subjects', subjectRouter);
 app.use('/api/v1/year-groups', yearGroupRouter);
 app.use('/api/v1/teachers', teacherRouter);
+app.use('/api/v1/exams', examRouter);
 
 // not found
 app.use(notFound);
