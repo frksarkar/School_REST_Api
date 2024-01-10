@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const { passwordEncrypt, isValidPassword } = require('../../utils/helper');
 
 const adminSchema = new mongoose.Schema(
 	{
@@ -10,12 +10,16 @@ const adminSchema = new mongoose.Schema(
 		academicTerms: [
 			{ type: mongoose.Schema.Types.ObjectId, ref: 'AcademicTerms' },
 		],
-		academicYear: [
+		academicYears: [
 			{ type: mongoose.Schema.Types.ObjectId, ref: 'AcademicYear' },
 		],
 		classLevels: [
 			{ type: mongoose.Schema.Types.ObjectId, ref: 'ClassLevel' },
 		],
+		yearGroups: [
+			{ type: mongoose.Schema.Types.ObjectId, ref: 'YearGroup' },
+		],
+		programs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Program' }],
 		teachers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' }],
 		students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
 	},
@@ -24,24 +28,8 @@ const adminSchema = new mongoose.Schema(
 	}
 );
 
-adminSchema.pre('save', async function (next) {
+adminSchema.pre('save', passwordEncrypt);
 
-	const passwordHash = await bcrypt.hash(this.password, 12);
-	this.password = passwordHash;
-
-	next();
-});
-
-adminSchema.pre('findOneAndUpdate', async function (next) {
-
-	const passwordHash = await bcrypt.hash(this._update.password, 12);
-	this._update.password = passwordHash;
-
-	next();
-});
-
-adminSchema.methods.verifyPassword = function (enterPassword) {
-	return bcrypt.compare(enterPassword, this.password);
-};
+adminSchema.methods.verifyPassword = isValidPassword;
 
 exports.Admin = mongoose.model('Admin', adminSchema);
