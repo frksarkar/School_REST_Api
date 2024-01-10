@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { isValidPassword, passwordEncrypt } = require('../../utils/helper');
 
 const { Schema } = mongoose;
 
@@ -53,7 +54,6 @@ const studentSchema = new Schema(
 		academicYear: {
 			type: Schema.Types.ObjectId,
 			ref: 'AcademicYear',
-			required: true,
 		},
 		dateAdmitted: {
 			type: Date,
@@ -68,7 +68,6 @@ const studentSchema = new Schema(
 		program: {
 			type: Schema.Types.ObjectId,
 			ref: 'Program',
-			required: true,
 		},
 		isPromotedToLevel200: {
 			type: Boolean,
@@ -117,5 +116,9 @@ const studentSchema = new Schema(
 		timestamps: true,
 	}
 );
+
+studentSchema.pre('save', passwordEncrypt);
+
+studentSchema.methods.verifyPassword = isValidPassword;
 
 exports.Student = mongoose.model('Student', studentSchema);
