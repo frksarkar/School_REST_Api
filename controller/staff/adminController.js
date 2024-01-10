@@ -78,10 +78,22 @@ exports.getAdmins = async function (req, res, next) {
 
 exports.getAdmin = async function (req, res, next) {
 	try {
+		const admin = {
+			id: req.user._id,
+			name: req.user.name,
+			email: req.user.email,
+			academicTerms: req.user.academicTerms,
+			academicYears: req.user.academicYears,
+			classLevels: req.user.classLevels,
+			yearGroups: req.user.yearGroups,
+			programs: req.user.programs,
+			teachers: req.user.teachers,
+			students: req.user.students,
+		};
 		res.status(200).json({
 			status: 'success',
 			message: 'get admin',
-			data: req.user,
+			data: admin,
 		});
 	} catch (error) {
 		next(error);
