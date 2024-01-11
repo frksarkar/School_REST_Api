@@ -8,7 +8,7 @@ const questionSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		optionsA: {
+		optionA: {
 			type: String,
 			required: true,
 		},
@@ -25,12 +25,11 @@ const questionSchema = new Schema(
 			required: true,
 		},
 		correctAnswer: {
-			type: Boolean,
-			default: true,
+			type: String,
+			required: true,
 		},
 		isCorrect: {
-			type: Boolean,
-			default: false,
+			type: String,
 		},
 		createdBy: {
 			type: Schema.Types.ObjectId,
@@ -43,4 +42,4 @@ const questionSchema = new Schema(
 	}
 );
 
-exports.Questions = mongoose.model('Questions', questionSchema);
+exports.Question = mongoose.model('Questions', questionSchema);

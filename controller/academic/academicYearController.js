@@ -25,9 +25,8 @@ exports.createAcademicYear = async function (req, res, next) {
 
 		// add academic year object id into to admin object
 		if (createdAcademicYear) {
-			const user = await Admin.findById(createdBy);
-			user.academicYear.push(createdAcademicYear);
-			user.save();
+			req.user.academicYears.push(createdAcademicYear);
+			req.user.save();
 		}
 
 		// send response

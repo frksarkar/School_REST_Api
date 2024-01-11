@@ -3,7 +3,7 @@ const { Program } = require('../../module/academic/program');
 const { Admin } = require('../../module/staff/admin');
 
 exports.createProgram = async function (req, res, next) {
-	const { name, description } = req.body;
+	const { name, description, duration } = req.body;
 	const createdBy = req.user._id;
 	try {
 		// check all input fields values are valid
@@ -19,6 +19,7 @@ exports.createProgram = async function (req, res, next) {
 		const createdProgram = await Program.create({
 			name,
 			description,
+			duration,
 			createdBy,
 		});
 

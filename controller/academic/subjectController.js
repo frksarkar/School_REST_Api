@@ -8,7 +8,7 @@ exports.createSubject = async function (req, res, next) {
 	const createdBy = req.user._id;
 	try {
 		// check all input fields values are valid
-		if (!(name && description && academicTerm && createdBy)) {
+		if (!(name && description && academicTerm && programId && createdBy)) {
 			throwErr('all input fields must be required', 400);
 		}
 
@@ -29,6 +29,7 @@ exports.createSubject = async function (req, res, next) {
 		// add subject object id into to admin object
 		if (createdSubject) {
 			const programObj = await Program.findById(programId);
+			if (!programObj) throwErr("can't find program", 500);
 			programObj.subjects.push(createdSubject);
 			programObj.save();
 		}

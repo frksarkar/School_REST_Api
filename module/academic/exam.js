@@ -58,7 +58,7 @@ const examSchema = new Schema(
 			default: 'pending',
 			enum: ['pending', 'live'],
 		},
-		question: [
+		questions: [
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Question',
