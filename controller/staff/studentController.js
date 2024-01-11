@@ -1,5 +1,6 @@
 const { defaultValue } = require('../../defaultValue');
 const { throwErr } = require('../../middlewares/errorHandler');
+const { Exam } = require('../../module/academic/exam');
 const { Student } = require('../../module/academic/student');
 const { Admin } = require('../../module/staff/admin');
 const { tokenGenerate } = require('../../utils/helper');
@@ -277,43 +278,21 @@ exports.adminDeleteStudent = async function (req, res, next) {
 	}
 };
 
-exports.adminSuspendStudent = function (req, res, next) {
+exports.studentWriteExam = async function (req, res, next) {
+	const answer = req.body;
+	const examId = req.params.examId;
 	try {
+		const examData = await Exam.findById(examId)	
+		if (!examData) {
+			throwErr('examData not found');
+		}
 		res.status(200).json({
-			message: 'suspended student successfully',
+			status: 'success',
+			data: examData,
 		});
+		
 	} catch (error) {
-		console.log(error.message);
-	}
-};
-
-exports.adminUnSuspendStudent = function (req, res, next) {
-	try {
-		res.status(200).json({
-			message: 'unSuspended student successfully',
-		});
-	} catch (error) {
-		console.log(error.message);
-	}
-};
-
-exports.adminWithdrawnStudent = function (req, res, next) {
-	try {
-		res.status(200).json({
-			message: 'withdrawn successfully',
-		});
-	} catch (error) {
-		console.log(error.message);
-	}
-};
-
-exports.adminUnWithdrawnStudent = function (req, res, next) {
-	try {
-		res.status(200).json({
-			message: 'unWithdrawn successfully',
-		});
-	} catch (error) {
-		console.log(error.message);
+		next(error);
 	}
 };
 
