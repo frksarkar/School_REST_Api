@@ -12,6 +12,10 @@ exports.createSubject = async function (req, res, next) {
 			throwErr('all input fields must be required', 400);
 		}
 
+		// program data doesn't exist
+		const programObj = await Program.findById(programId);
+		if (!programObj) throwErr("can't find program", 500);
+
 		// if subject is already exist
 		const alreadyExist = await Subject.findOne({ name });
 		if (alreadyExist) {
@@ -25,14 +29,14 @@ exports.createSubject = async function (req, res, next) {
 			academicTerm,
 			createdBy,
 		});
+		// throw error if subject is not created
+		if (!createdSubject) {
+			throwErr('subject not created', 500);
+		}
 
 		// add subject object id into to admin object
-		if (createdSubject) {
-			const programObj = await Program.findById(programId);
-			if (!programObj) throwErr("can't find program", 500);
-			programObj.subjects.push(createdSubject);
-			programObj.save();
-		}
+		programObj.subjects.push(createdSubject);
+		programObj.save();
 
 		// send response
 		res.json({
@@ -78,7 +82,7 @@ exports.getSubject = async function (req, res, next) {
 };
 
 exports.updateSubject = async function (req, res, next) {
-	const { name, description, academicTerm } = req.body;
+	const { name, description, duration, academicTerm } = req.body;
 	const subjectId = req.params.id;
 	try {
 		const existSubject = await Subject.findById(subjectId);
@@ -87,12 +91,15 @@ exports.updateSubject = async function (req, res, next) {
 			throwErr('provided valid subject id', 403);
 		}
 		// if any one filed data aren't exist
-		if (name || description || academicTerm) {
+		if (name || description || duration || academicTerm) {
 			if (name) {
 				existSubject.name = name;
 			}
 			if (description) {
 				existSubject.description = description;
+			}
+			if (duration) {
+				existSubject.duration = duration;
 			}
 			if (academicTerm) {
 				existSubject.academicTerm = academicTerm;
