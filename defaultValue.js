@@ -12,7 +12,8 @@ exports.defaultAppValue = {
 	academicTermDuration: '3 months',
 	subjectDuration: '3 months',
 	examDuration: '30 minutes',
-	examResultEnumVal: ['Excellent', 'Good', 'Poor'],
-	examStatusEnumVal: ['failed', 'passed'],
+	examResultEnumVal: ['Excellent', 'Very Good', 'Good', 'Poor'],
+	examStatusEnumVal: ['fail', 'pass'],
 	teacherApplicationStatusEnumVal: ['pending', 'approved', 'rejected'],
+	passMark: 33,
 };
