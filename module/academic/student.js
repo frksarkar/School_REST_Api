@@ -69,18 +69,7 @@ const studentSchema = new Schema(
 			type: Schema.Types.ObjectId,
 			ref: 'Program',
 		},
-		isPromotedToLevel200: {
-			type: Boolean,
-			default: false,
-		},
-		isPromotedToLevel300: {
-			type: Boolean,
-			default: false,
-		},
-		isPromotedToLevel400: {
-			type: Boolean,
-			default: false,
-		},
+	
 		isGraduated: {
 			type: Boolean,
 			default: false,
@@ -97,7 +86,7 @@ const studentSchema = new Schema(
 			type: String,
 		},
 		yearGraduated: {
-			type: String,
+			type: Date,
 		},
 		// behaviorReport: [
 		// 	{

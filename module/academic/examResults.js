@@ -19,20 +19,16 @@ const examResultSchema = new Schema(
 			type: Number,
 			required: true,
 		},
-		score: {
-			type: Number,
-			required: true,
-		},
 		passMark: {
 			type: Number,
 			required: true,
-			default: 50,
+			default: 100,
 		},
 		status: {
 			type: String,
 			required: true,
 			enum: defaultAppValue.examStatusEnumVal,
-			default: 'failed',
+			default: 'fail',
 		},
 		remarks: {
 			type: String,
@@ -40,17 +36,19 @@ const examResultSchema = new Schema(
 			enum: defaultAppValue.examResultEnumVal,
 			default: 'Poor',
 		},
-		position: {
-			type: Number,
-			required: true,
-		},
+		// position: {
+		// 	type: Number,
+		// 	required: true,
+		// },
 		subject: {
 			type: Schema.Types.ObjectId,
 			ref: 'Subject',
+			required: true,
 		},
 		classLevel: {
 			type: Schema.Types.ObjectId,
 			ref: 'ClassLevel',
+			required: true,
 		},
 		academicTerm: {
 			type: Schema.Types.ObjectId,
