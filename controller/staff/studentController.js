@@ -1,6 +1,7 @@
-const { defaultValue } = require('../../defaultValue');
+const { defaultValue, defaultAppValue } = require('../../defaultValue');
 const { throwErr } = require('../../middlewares/errorHandler');
 const { Exam } = require('../../module/academic/exam');
+const { ExamResult } = require('../../module/academic/examResults');
 const { Student } = require('../../module/academic/student');
 const { Admin } = require('../../module/staff/admin');
 const { tokenGenerate } = require('../../utils/helper');
@@ -279,18 +280,97 @@ exports.adminDeleteStudent = async function (req, res, next) {
 };
 
 exports.studentWriteExam = async function (req, res, next) {
-	const answer = req.body;
+	const { answer } = req.body;
 	const examId = req.params.examId;
+	const studentId = req.user._id;
+	const studentObj = req.user;
+	const result = {
+		totalMark: 100,
+		grade: 0,
+		status: 'fail',
+		remarks: 'poor',
+		falseAnswer: 0,
+		correctAnswer: 0,
+	};
+
 	try {
-		const examData = await Exam.findById(examId)	
+		// find the exam
+		const examData = await Exam.findById(examId).populate('questions');
 		if (!examData) {
 			throwErr('examData not found');
 		}
+
+		// if already tacked on exam
+		const existResult = await ExamResult.findOne({ student: studentId });
+		if (existResult) {
+			throwErr('you are already in the exam', 400);
+		}
+
+		// separate the questions
+		const questions = examData?.questions;
+
+		// calculate the exam question length
+		const questionLength = questions.length;
+
+		// user can't fil all questions then error
+		if (!(answer && answer.length == questionLength)) {
+			throwErr('fullfil all questions', 400);
+		}
+
+		// find correct or false answers
+		questions.forEach((question, index) => {
+			if (question.correctAnswer === answer[index]) {
+				result.correctAnswer++;
+			} else {
+				result.falseAnswer++;
+			}
+		});
+
+		// calculate the total grade
+		result.grade = Math.floor(
+			(result.correctAnswer / questionLength) * result.totalMark
+		);
+
+		// pass or fail
+		if (result.grade >= defaultAppValue.passMark) {
+			result.status = 'pass';
+		}
+
+		// remark student
+		if (80 <= result.grade) {
+			result.remarks = 'Excellent';
+		} else if (70 <= result.grade) {
+			result.remarks = 'Very Good';
+		} else if (50 <= result.grade) {
+			result.remarks = 'Good';
+		} else if (33 <= result.grade) {
+			result.remarks = 'Poor';
+		}
+
+
+		const examResult = await ExamResult.create({
+			academicTerm: examData.academicTerm,
+			academicYear: examData.academicYear,
+			classLevel: examData.classLevel,
+			exam: examData._id,
+			grade: result.grade,
+			remarks: result.remarks,
+			status: result.status,
+			student: studentId,
+			subject: examData.subject,
+		});
+
 		res.status(200).json({
 			status: 'success',
-			data: examData,
+			data: {
+				grade: result.grade,
+				status: result.status,
+				remarks: result.remarks,
+				correctAnswer: result.correctAnswer,
+				falseAnswer: result.falseAnswer,
+				examResult,
+			},
 		});
-		
 	} catch (error) {
 		next(error);
 	}
