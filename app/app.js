@@ -14,6 +14,7 @@ const { examRouter } = require('../routes/academic/examRouter');
 const { defaultHandler } = require('../middlewares/defaultHandler');
 const { studentRouter } = require('../routes/staff/studentRouter');
 const { questionRouter } = require('../routes/academic/questionRouter');
+const { examResultRouter } = require('../routes/academic/examResultRouter');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use('/api/v1/teachers', teacherRouter);
 app.use('/api/v1/exams', examRouter);
 app.use('/api/v1/students', studentRouter);
 app.use('/api/v1/questions', questionRouter);
+app.use('/api/v1/exam/results', examResultRouter);
 
 // not found
 app.use(notFound);
