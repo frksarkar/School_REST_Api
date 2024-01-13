@@ -233,3 +233,36 @@ exports.deleteExam = async function (req, res, next) {
 		next(error);
 	}
 };
+
+exports.adminChangeExamStatus = async function (req, res, next) {
+	const examId = req.params.examId;
+	const { examStatus } = req.body;
+	try {
+		const exam = await Exam.findById(examId);
+
+		if (!exam) {
+			throwErr('provided valid exam id', 400);
+		}
+
+		if (!examStatus) {
+			throwErr('fill the input', 400);
+		}
+
+		// change the exam status
+		const updateExam = await Exam.findByIdAndUpdate(
+			examId,
+			{
+				examStatus,
+			},
+			{ new: true }
+		);
+
+		res.json({
+			status: 'success',
+			message: 'exam status successfully update',
+			data: updateExam,
+		});
+	} catch (error) {
+		next(error);
+	}
+};
