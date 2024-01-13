@@ -119,7 +119,7 @@ exports.updateTeacherProfile = async function (req, res, next) {
 	}
 };
 
-exports.adminTeacherRegister = async function (req, res, next) {
+exports. adminTeacherRegister = async function (req, res, next) {
 	const { name, email, password } = req.body;
 	const createdBy = req.user._id;
 

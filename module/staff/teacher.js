@@ -54,17 +54,31 @@ const teacherSchema = new Schema(
 		subject: {
 			type: Schema.Types.ObjectId,
 			ref: 'Subject',
-			// required: true,
+			required: true,
 		},
 		applicationStatus: {
 			type: String,
 			enum: defaultAppValue.teacherApplicationStatusEnumVal,
 			default: 'pending',
 		},
-		program: String,
-		classLevel: String,
-		academicYear: String,
-		academicTerm: String,
+		program: {
+			type: Schema.Types.ObjectId,
+			ref: 'Program',
+			required: true,
+		},
+		classLevel: {
+			type: Schema.Types.ObjectId,
+			ref: 'ClassLevel',
+		},
+		academicYear: {
+			type: Schema.Types.ObjectId,
+			ref: 'AcademicYear',
+		},
+		academicTerm: {
+			type: Schema.Types.ObjectId,
+			ref: 'AcademicTerm',
+			required: true,
+		},
 		examsCreated: [
 			{
 				type: Schema.Types.ObjectId,

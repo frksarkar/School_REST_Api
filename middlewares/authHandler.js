@@ -30,7 +30,7 @@ exports.isAdmin = async function (req, res, next) {
 			throwErr('login failed', 400);
 		}
 		// check if the user is exist then send the user into req.obj
-		if (!adminData?.role === 'admin') {
+		if (!(adminData?.role === 'admin')) {
 			throwErr('Access denied, admin can access only', 400);
 		}
 		req.user = adminData;
@@ -66,7 +66,7 @@ exports.isTeacher = async function (req, res, next) {
 			throwErr('login failed', 400);
 		}
 		// check if the user is exist then send the user into req.obj
-		if (!teacherData?.role === 'teacher') {
+		if (!(teacherData?.role === 'teacher')) {
 			throwErr('Access denied, teacher can access only', 400);
 		}
 		req.user = teacherData;
@@ -97,15 +97,15 @@ exports.isStudent = async function (req, res, next) {
 	try {
 		// find the user in the database
 		const userId = req.user?.id;
-		const teacherData = await Student.findById(userId);
-		if (!teacherData) {
+		const studentData = await Student.findById(userId);
+		if (!studentData) {
 			throwErr('login failed', 400);
 		}
 		// check if the user is exist then send the user into req.obj
-		if (!teacherData?.role === 'teacher') {
-			throwErr('Access denied, teacher can access only', 400);
+		if (!(studentData?.role === 'student')) {
+			throwErr('Access denied, student can access only', 400);
 		}
-		req.user = teacherData;
+		req.user = studentData;
 		next();
 	} catch (error) {
 		next(error);

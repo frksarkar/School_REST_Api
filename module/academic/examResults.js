@@ -60,10 +60,7 @@ const examResultSchema = new Schema(
 			ref: 'AcademicYear',
 			required: true,
 		},
-		isPublished: {
-			type: Boolean,
-			default: false,
-		},
+		
 	},
 	{
 		timestamps: true,

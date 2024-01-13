@@ -347,7 +347,7 @@ exports.studentWriteExam = async function (req, res, next) {
 			result.remarks = 'Poor';
 		}
 
-
+		// create student exam result
 		const examResult = await ExamResult.create({
 			academicTerm: examData.academicTerm,
 			academicYear: examData.academicYear,
@@ -360,40 +360,50 @@ exports.studentWriteExam = async function (req, res, next) {
 			subject: examData.subject,
 		});
 
+		// push student result into student object
+		studentObj.examResults.push(examResult);
+		studentObj.save();
+
 		res.status(200).json({
 			status: 'success',
-			data: {
-				grade: result.grade,
-				status: result.status,
-				remarks: result.remarks,
-				correctAnswer: result.correctAnswer,
-				falseAnswer: result.falseAnswer,
-				examResult,
-			},
+			message: 'taken your submit question successfully',
 		});
 	} catch (error) {
 		next(error);
 	}
 };
 
-exports.adminPublishExam = function (req, res, next) {
+exports.studentGetExamResult = async function (req, res, next) {
+	const examId = req.params.examId;
+	const studentId = req.user._id;
 	try {
-		res.status(200).json({
-			status: 'success',
-			data: 'Exam Publish successfully',
-		});
-	} catch (error) {
-		console.log(error.message);
-	}
-};
+		if (!examId) {
+			throwErr('provided valid exam id', 400);
+		}
 
-exports.adminUnPublishExam = function (req, res, next) {
-	try {
+		const result = await ExamResult.findOne({
+			exam: examId,
+			student: studentId,
+		}).populate('exam');
+
+		if (!result?.exam.resultPublished) {
+			throwErr('result is not published');
+		}
+
+		const examObj = {
+			name: result.exam.name,
+			grade: result.grade,
+			passMark: result.passMark,
+			remarks: result.remarks,
+			examType: result.exam.examType,
+		};
+
 		res.status(200).json({
 			status: 'success',
-			data: 'Exam UnPublish successfully',
+			message: 'get result successfully',
+			data: examObj,
 		});
 	} catch (error) {
-		console.log(error.message);
+		next(error);
 	}
 };

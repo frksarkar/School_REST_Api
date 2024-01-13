@@ -64,6 +64,10 @@ const examSchema = new Schema(
 				ref: 'Question',
 			},
 		],
+		resultPublished: {
+			type: Boolean,
+			default: false,
+		},
 		classLevel: {
 			type: Schema.Types.ObjectId,
 			ref: 'ClassLevel',
