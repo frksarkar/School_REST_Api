@@ -16,6 +16,7 @@ const {
 	getStudentProfile,
 	updateStudentProfile,
 	studentWriteExam,
+	studentGetExamResult,
 } = require('../../controller/staff/studentController');
 const {
 	isLoggedIn,
@@ -31,9 +32,26 @@ studentRouter.post('/login', studentLogin);
 
 studentRouter.get('/profile', isLoginStudent, isStudent, getStudentProfile); // get single student
 
-studentRouter.put('/update/profile', isLoginStudent, isStudent, updateStudentProfile)
+studentRouter.get(
+	'/result/:examId',
+	isLoginStudent,
+	isStudent,
+	studentGetExamResult
+);
 
-studentRouter.post('/exam/:examId', isLoginStudent, isStudent, studentWriteExam)
+studentRouter.put(
+	'/update/profile',
+	isLoginStudent,
+	isStudent,
+	updateStudentProfile
+);
+
+studentRouter.post(
+	'/exam/:examId',
+	isLoginStudent,
+	isStudent,
+	studentWriteExam
+);
 
 // admin can access the routes
 studentRouter
