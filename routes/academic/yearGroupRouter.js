@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { isLoggedIn, isAdmin } = require('../../middlewares/authHandler');
+const { isAuthenticated, roleRestriction } = require('../../middlewares/authHandler');
 const {
 	createYearGroup,
 	getYearGroups,
@@ -12,7 +12,7 @@ const {
 const yearGroupRouter = express.Router();
 
 yearGroupRouter
-	.use(isLoggedIn, isAdmin)
+	.use(isAuthenticated, roleRestriction('admin'))
 	.get('/', getYearGroups)
 	.post('/', createYearGroup)
 	.get('/:id', getYearGroup)

@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { isLoggedIn, isAdmin } = require('../../middlewares/authHandler');
+const { isAuthenticated, roleRestriction } = require('../../middlewares/authHandler');
 const {
 	createClassLevel,
 	getClassLevels,
@@ -12,7 +12,7 @@ const {
 const classLevelRouter = express.Router();
 
 classLevelRouter
-	.use(isLoggedIn, isAdmin)
+	.use(isAuthenticated, roleRestriction('admin'))
 	.get('/', getClassLevels)
 	.post('/', createClassLevel)
 	.get('/:id', getClassLevel)

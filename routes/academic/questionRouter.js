@@ -1,6 +1,9 @@
 const express = require('express');
 
-const { isLoginTeacher, isTeacher } = require('../../middlewares/authHandler');
+const {
+	isAuthenticated,
+	roleRestriction,
+} = require('../../middlewares/authHandler');
 const {
 	createQuestion,
 	getQuestions,
@@ -12,7 +15,7 @@ const {
 const questionRouter = express.Router();
 
 questionRouter
-	.use(isLoginTeacher, isTeacher)
+	.use(isAuthenticated, roleRestriction('teacher'))
 	.get('/', getQuestions)
 	.post('/:examId', createQuestion)
 	.get('/:id', getQuestion)

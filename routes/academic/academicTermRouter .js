@@ -1,6 +1,9 @@
 const express = require('express');
 
-const { isLoggedIn, isAdmin } = require('../../middlewares/authHandler');
+const {
+	isAuthenticated,
+	roleRestriction,
+} = require('../../middlewares/authHandler');
 const {
 	createAcademicTerm,
 	getAcademicTerms,
@@ -8,11 +11,12 @@ const {
 	updateAcademicTerm,
 	deleteAcademicTerm,
 } = require('../../controller/academic/academicTermController');
+const { Admin } = require('../../module/staff/admin');
 
 const academicTermRouter = express.Router();
 
 academicTermRouter
-	.use(isLoggedIn, isAdmin)
+	.use(isAuthenticated, roleRestriction('admin', Admin))
 	.get('/', getAcademicTerms)
 	.post('/', createAcademicTerm)
 	.get('/:id', getAcademicTerm)

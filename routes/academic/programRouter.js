@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { isLoggedIn, isAdmin } = require('../../middlewares/authHandler');
+const { isAuthenticated, roleRestriction } = require('../../middlewares/authHandler');
 const {
 	createProgram,
 	getPrograms,
@@ -12,7 +12,7 @@ const {
 const programRouter = express.Router();
 
 programRouter
-	.use(isLoggedIn, isAdmin)
+	.use(isAuthenticated, roleRestriction('admin'))
 	.get('/', getPrograms)
 	.post('/', createProgram)
 	.get('/:id', getProgram)

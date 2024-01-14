@@ -1,6 +1,9 @@
 const express = require('express');
 
-const { isLoggedIn, isAdmin } = require('../../middlewares/authHandler');
+const {
+	isAuthenticated,
+	roleRestriction,
+} = require('../../middlewares/authHandler');
 const {
 	createSubject,
 	getSubjects,
@@ -12,7 +15,7 @@ const {
 const subjectRouter = express.Router();
 
 subjectRouter
-	.use(isLoggedIn, isAdmin)
+	.use(isAuthenticated, roleRestriction('admin'))
 	.get('/', getSubjects)
 	.post('/:programId', createSubject)
 	.get('/:id', getSubject)

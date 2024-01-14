@@ -7,12 +7,15 @@ const {
 	updateAcademicYear,
 	deleteAcademicYear,
 } = require('../../controller/academic/academicYearController');
-const { isLoggedIn, isAdmin } = require('../../middlewares/authHandler');
+const {
+	isAuthenticated,
+	roleRestriction,
+} = require('../../middlewares/authHandler');
 
 const academicYearRouter = express.Router();
 
 academicYearRouter
-	.use(isLoggedIn, isAdmin)
+	.use(isAuthenticated, roleRestriction('admin'))
 	.get('/', getAcademicYears)
 	.post('/', createAcademicYear)
 	.get('/:id', getAcademicYear)

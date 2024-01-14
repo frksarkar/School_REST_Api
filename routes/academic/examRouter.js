@@ -1,10 +1,8 @@
 const express = require('express');
 
 const {
-	isLoginTeacher,
-	isTeacher,
-	isLoggedIn,
-	isAdmin,
+	isAuthenticated,
+	roleRestriction,
 } = require('../../middlewares/authHandler');
 const {
 	createExam,
@@ -17,15 +15,19 @@ const {
 
 const examRouter = express.Router();
 
-examRouter.put('/publish/:examId', isLoggedIn, isAdmin, adminChangeExamStatus);
+examRouter.put(
+	'/publish/:examId',
+	isAuthenticated,
+	roleRestriction('admin'),
+	adminChangeExamStatus
+);
 
 examRouter
-	.use(isLoginTeacher, isTeacher)
+	.use(isAuthenticated, roleRestriction('teacher'))
 	.get('/', getExams)
 	.post('/create', createExam)
 	.get('/:id', getExam)
 	.put('/:id', updateExam)
 	.delete('/:id', deleteExam);
-
 
 exports.examRouter = examRouter;
