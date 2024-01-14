@@ -300,6 +300,10 @@ exports.studentWriteExam = async function (req, res, next) {
 			throwErr('examData not found');
 		}
 
+		if (examData.examStatus === 'pending') {
+			throwErr('This moment, the exam is not live.');
+		}
+
 		// if already tacked on exam
 		const existResult = await ExamResult.findOne({ student: studentId });
 		if (existResult) {
