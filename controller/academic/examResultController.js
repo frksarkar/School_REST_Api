@@ -1,5 +1,6 @@
 const { throwErr } = require('../../middlewares/errorHandler');
 const { Exam } = require('../../module/academic/exam');
+const { ExamResult } = require('../../module/academic/examResults');
 
 exports.adminToggleExamResult = async function (req, res, next) {
 	const examId = req.params.examId;
@@ -16,6 +17,17 @@ exports.adminToggleExamResult = async function (req, res, next) {
 		res.status(200).json({
 			status: 'success',
 			data: examPaper,
+		});
+	} catch (error) {}
+};
+
+exports.adminGetAllExamResult = async function (req, res, next) {
+	try {
+		const allResult = await ExamResult.find();
+
+		res.json({
+			status: 'success',
+			data: allResult,
 		});
 	} catch (error) {}
 };
