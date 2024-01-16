@@ -22,12 +22,9 @@ exports.adminToggleExamResult = async function (req, res, next) {
 };
 
 exports.adminGetAllExamResult = async function (req, res, next) {
-	try {
-		const allResult = await ExamResult.find();
-
-		res.json({
-			status: 'success',
-			data: allResult,
-		});
-	} catch (error) {}
+	res.json({
+		status: 'success',
+		data: req.data,
+		pagination: req.pagination,
+	});
 };

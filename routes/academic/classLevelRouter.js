@@ -1,6 +1,9 @@
 const express = require('express');
 
-const { isAuthenticated, roleRestriction } = require('../../middlewares/authHandler');
+const {
+	isAuthenticated,
+	roleRestriction,
+} = require('../../middlewares/authHandler');
 const {
 	createClassLevel,
 	getClassLevels,
@@ -8,12 +11,14 @@ const {
 	updateClassLevel,
 	deleteClassLevel,
 } = require('../../controller/academic/classLevelController');
+const { getAllData } = require('../../controller/common');
+const { ClassLevel } = require('../../module/academic/classLevel');
 
 const classLevelRouter = express.Router();
 
 classLevelRouter
 	.use(isAuthenticated, roleRestriction('admin'))
-	.get('/', getClassLevels)
+	.get('/', getAllData(ClassLevel), getClassLevels)
 	.post('/', createClassLevel)
 	.get('/:id', getClassLevel)
 	.put('/:id', updateClassLevel)

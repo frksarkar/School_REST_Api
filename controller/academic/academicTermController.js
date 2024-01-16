@@ -1,6 +1,5 @@
 const { throwErr } = require('../../middlewares/errorHandler');
 const { AcademicTerm } = require('../../module/academic/academicTerm');
-
 const { Admin } = require('../../module/staff/admin');
 
 exports.createAcademicTerm = async function (req, res, next) {
@@ -43,17 +42,12 @@ exports.createAcademicTerm = async function (req, res, next) {
 };
 
 exports.getAcademicTerms = async function (req, res, next) {
-	try {
-		const academicData = await AcademicTerm.find();
-		// send response
-		res.json({
-			status: 'success',
-			message: 'fetch successfully academic term data',
-			data: academicData,
-		});
-	} catch (error) {
-		next(error);
-	}
+	res.json({
+		status: 'success',
+		message: 'fetch successfully academic term data',
+		data: req.data,
+		pagination: req.pagination,
+	});
 };
 
 exports.getAcademicTerm = async function (req, res, next) {

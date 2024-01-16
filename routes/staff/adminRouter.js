@@ -14,8 +14,12 @@ const {
 	adminPublishExam,
 	adminUnPublishExam,
 } = require('../../controller/staff/adminController');
-const { isAuthenticated, roleRestriction } = require('../../middlewares/authHandler');
+const {
+	isAuthenticated,
+	roleRestriction,
+} = require('../../middlewares/authHandler');
 const { Admin } = require('../../module/staff/admin');
+const { getAllData } = require('../../controller/common');
 
 const adminRouter = express.Router();
 
@@ -27,9 +31,9 @@ adminRouter.post('/login', adminLogin);
 
 adminRouter
 	.use(isAuthenticated, roleRestriction('admin', Admin))
-	.get('/', getAdmins) // get all admins
+	.get('/', getAllData(Admin), getAdmins) // get all admins
 	.get('/profile', getAdmin) // get single admin
-	.put('/', updateAdmin) // update admin
+	.put('/update', updateAdmin) // update admin
 	.delete('/:id', deleteAdmin); // delete single admin
 
 // admin suspend teacher

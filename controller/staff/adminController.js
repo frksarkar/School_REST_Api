@@ -2,6 +2,7 @@ const { defaultValue } = require('../../defaultValue');
 const { throwErr } = require('../../middlewares/errorHandler');
 const { Admin } = require('../../module/staff/admin');
 const { tokenGenerate } = require('../../utils/helper');
+const { pagination } = require('../../utils/pagination');
 
 exports.adminRegister = async function (req, res, next) {
 	const { name, email, password } = req.body;
@@ -64,16 +65,12 @@ exports.adminLogin = async function (req, res, next) {
 };
 
 exports.getAdmins = async function (req, res, next) {
-	try {
-		const users = await Admin.find().select('-password');
-		res.status(200).json({
-			status: 'success',
-			message: 'fetch all admins data',
-			data: users,
-		});
-	} catch (error) {
-		next(error);
-	}
+	res.status(200).json({
+		status: 'success',
+		message: 'fetch all admins data',
+		data: req.data,
+		pagination: req.pagination,
+	});
 };
 
 exports.getAdmin = async function (req, res, next) {

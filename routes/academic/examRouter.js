@@ -12,6 +12,8 @@ const {
 	deleteExam,
 	adminChangeExamStatus,
 } = require('../../controller/academic/examController');
+const { getAllData } = require('../../controller/common');
+const { Exam } = require('../../module/academic/exam');
 
 const examRouter = express.Router();
 
@@ -24,7 +26,7 @@ examRouter.put(
 
 examRouter
 	.use(isAuthenticated, roleRestriction('teacher'))
-	.get('/', getExams)
+	.get('/', getAllData(Exam), getExams)
 	.post('/create', createExam)
 	.get('/:id', getExam)
 	.put('/:id', updateExam)

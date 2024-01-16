@@ -50,17 +50,12 @@ exports.createSubject = async function (req, res, next) {
 };
 
 exports.getSubjects = async function (req, res, next) {
-	try {
-		const subjectsData = await Subject.find();
-		// send response
-		res.json({
-			status: 'success',
-			message: 'fetch successfully subject data',
-			data: subjectsData,
-		});
-	} catch (error) {
-		next(error);
-	}
+	res.json({
+		status: 'success',
+		message: 'fetch successfully subject data',
+		data: req.data,
+		pagination: req.pagination,
+	});
 };
 
 exports.getSubject = async function (req, res, next) {

@@ -11,12 +11,14 @@ const {
 	isAuthenticated,
 	roleRestriction,
 } = require('../../middlewares/authHandler');
+const { getAllData } = require('../../controller/common');
+const { AcademicYear } = require('../../module/academic/academicYear');
 
 const academicYearRouter = express.Router();
 
 academicYearRouter
 	.use(isAuthenticated, roleRestriction('admin'))
-	.get('/', getAcademicYears)
+	.get('/', getAllData(AcademicYear), getAcademicYears)
 	.post('/', createAcademicYear)
 	.get('/:id', getAcademicYear)
 	.put('/:id', updateAcademicYear)

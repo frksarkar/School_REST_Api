@@ -1,6 +1,7 @@
 const { throwErr } = require('../../middlewares/errorHandler');
 const { AcademicYear } = require('../../module/academic/academicYear');
 const { Admin } = require('../../module/staff/admin');
+const { pagination } = require('../../utils/pagination');
 
 exports.createAcademicYear = async function (req, res, next) {
 	const { name, fromYear, toYear } = req.body;
@@ -41,17 +42,12 @@ exports.createAcademicYear = async function (req, res, next) {
 };
 
 exports.getAcademicYears = async function (req, res, next) {
-	try {
-		const academicData = await AcademicYear.find();
-		// send response
-		res.json({
-			status: 'success',
-			message: 'fetch successfully academic year data',
-			data: academicData,
-		});
-	} catch (error) {
-		next(error);
-	}
+	res.json({
+		status: 'success',
+		message: 'fetch successfully academic year data',
+		data: req.data,
+		pagination: req.pagination,
+	});
 };
 
 exports.getAcademicYear = async function (req, res, next) {
@@ -96,7 +92,6 @@ exports.updateAcademicYear = async function (req, res, next) {
 		} else {
 			throwErr('provided only one field data', 403);
 		}
-		
 
 		// send response
 		res.json({

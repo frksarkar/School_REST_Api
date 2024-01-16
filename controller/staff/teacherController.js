@@ -3,6 +3,7 @@ const { throwErr } = require('../../middlewares/errorHandler');
 const { Admin } = require('../../module/staff/admin');
 const { Teacher } = require('../../module/staff/teacher');
 const { tokenGenerate } = require('../../utils/helper');
+const { pagination } = require('../../utils/pagination');
 
 exports.teacherLogin = async function (req, res, next) {
 	const { email, password } = req.body;
@@ -119,7 +120,7 @@ exports.updateTeacherProfile = async function (req, res, next) {
 	}
 };
 
-exports. adminTeacherRegister = async function (req, res, next) {
+exports.adminTeacherRegister = async function (req, res, next) {
 	const { name, email, password } = req.body;
 	const createdBy = req.user._id;
 
@@ -153,16 +154,12 @@ exports. adminTeacherRegister = async function (req, res, next) {
 };
 
 exports.AdminGetTeachers = async function (req, res, next) {
-	try {
-		const users = await Teacher.find().select('-password');
-		res.status(200).json({
-			status: 'success',
-			message: 'fetch all teachers data',
-			data: users,
-		});
-	} catch (error) {
-		console.log(error.message);
-	}
+	res.status(200).json({
+		status: 'success',
+		message: 'fetch all teachers data',
+		data: req.data,
+		pagination: req.pagination,
+	});
 };
 
 exports.AdminGetTeacher = async function (req, res, next) {

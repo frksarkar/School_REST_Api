@@ -41,17 +41,12 @@ exports.createClassLevel = async function (req, res, next) {
 };
 
 exports.getClassLevels = async function (req, res, next) {
-	try {
-		const classLevelsData = await ClassLevel.find();
-		// send response
-		res.json({
-			status: 'success',
-			message: 'fetch successfully academic term data',
-			data: classLevelsData,
-		});
-	} catch (error) {
-		next(error);
-	}
+	res.json({
+		status: 'success',
+		message: 'fetch successfully academic term data',
+		data: req.data,
+		pagination: req.pagination,
+	});
 };
 
 exports.getClassLevel = async function (req, res, next) {

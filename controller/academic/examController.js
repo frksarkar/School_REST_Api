@@ -80,17 +80,12 @@ exports.createExam = async function (req, res, next) {
 };
 
 exports.getExams = async function (req, res, next) {
-	try {
-		const examData = await Exam.find();
-		// send response
-		res.json({
-			status: 'success',
-			message: 'fetch successfully exam data',
-			data: examData,
-		});
-	} catch (error) {
-		next(error);
-	}
+	res.json({
+		status: 'success',
+		message: 'fetch successfully exam data',
+		data: req.data,
+		pagination: req.pagination,
+	});
 };
 
 exports.getExam = async function (req, res, next) {

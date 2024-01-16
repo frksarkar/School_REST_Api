@@ -42,17 +42,13 @@ exports.createProgram = async function (req, res, next) {
 };
 
 exports.getPrograms = async function (req, res, next) {
-	try {
-		const programsData = await Program.find();
-		// send response
-		res.json({
-			status: 'success',
-			message: 'fetch successfully program data',
-			data: programsData,
-		});
-	} catch (error) {
-		next(error);
-	}
+	// send response
+	res.json({
+		status: 'success',
+		message: 'fetch successfully program data',
+		data: req.data,
+		pagination: req.pagination,
+	});
 };
 
 exports.getProgram = async function (req, res, next) {

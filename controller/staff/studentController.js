@@ -5,6 +5,7 @@ const { ExamResult } = require('../../module/academic/examResults');
 const { Student } = require('../../module/academic/student');
 const { Admin } = require('../../module/staff/admin');
 const { tokenGenerate } = require('../../utils/helper');
+const { pagination } = require('../../utils/pagination');
 
 exports.studentLogin = async function (req, res, next) {
 	const { email, password } = req.body;
@@ -149,16 +150,12 @@ exports.adminRegisterStudent = async function (req, res, next) {
 };
 
 exports.AdminGetStudents = async function (req, res, next) {
-	try {
-		const users = await Student.find().select('-password');
-		res.status(200).json({
-			status: 'success',
-			message: 'fetch all students data',
-			data: users,
-		});
-	} catch (error) {
-		next(error);
-	}
+	res.status(200).json({
+		status: 'success',
+		message: 'fetch all students data',
+		data: req.data,
+		pagination: req.pagination,
+	});
 };
 
 exports.AdminGetStudent = async function (req, res, next) {

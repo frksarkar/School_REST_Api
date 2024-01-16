@@ -11,12 +11,14 @@ const {
 	updateSubject,
 	deleteSubject,
 } = require('../../controller/academic/subjectController');
+const { getAllData } = require('../../controller/common');
+const { Subject } = require('../../module/academic/subject');
 
 const subjectRouter = express.Router();
 
 subjectRouter
 	.use(isAuthenticated, roleRestriction('admin'))
-	.get('/', getSubjects)
+	.get('/', getAllData(Subject), getSubjects)
 	.post('/:programId', createSubject)
 	.get('/:id', getSubject)
 	.put('/:id', updateSubject)

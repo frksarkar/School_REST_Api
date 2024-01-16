@@ -41,17 +41,12 @@ exports.createYearGroup = async function (req, res, next) {
 };
 
 exports.getYearGroups = async function (req, res, next) {
-	try {
-		const yearGroupsData = await YearGroup.find();
-		// send response
-		res.json({
-			status: 'success',
-			message: 'fetch successfully year group data',
-			data: yearGroupsData,
-		});
-	} catch (error) {
-		next(error);
-	}
+	res.json({
+		status: 'success',
+		message: 'fetch successfully year group data',
+		data: req.data,
+		pagination: req.pagination,
+	});
 };
 
 exports.getYearGroup = async function (req, res, next) {

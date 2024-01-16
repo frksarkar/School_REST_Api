@@ -16,6 +16,8 @@ const {
 	isAuthenticated,
 	roleRestriction,
 } = require('../../middlewares/authHandler');
+const { getAllData } = require('../../controller/common');
+const { Student } = require('../../module/academic/student');
 
 const studentRouter = express.Router();
 
@@ -53,7 +55,7 @@ studentRouter.post(
 // admin can access the routes
 studentRouter
 	.use(isAuthenticated, roleRestriction('admin'))
-	.get('/', AdminGetStudents) // get all students
+	.get('/', getAllData(Student), AdminGetStudents) // get all students
 	.get('/admin/:studentId', AdminGetStudent) // get a student
 	.put('/admin/:studentId', adminUpdateStudent) // update student
 	.post('/admin/register', adminRegisterStudent) // student register

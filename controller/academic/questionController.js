@@ -63,17 +63,12 @@ exports.createQuestion = async function (req, res, next) {
 };
 
 exports.getQuestions = async function (req, res, next) {
-	try {
-		const questionsData = await Question.find();
-		// send response
-		res.json({
-			status: 'success',
-			message: 'fetch successfully question data',
-			data: questionsData,
-		});
-	} catch (error) {
-		next(error);
-	}
+	res.json({
+		status: 'success',
+		message: 'fetch successfully question data',
+		data: req.data,
+		pagination: req.pagination,
+	});
 };
 
 exports.getQuestion = async function (req, res, next) {
@@ -151,7 +146,7 @@ exports.deleteQuestion = async function (req, res, next) {
 	const examId = req.params.examId;
 	try {
 		const questionData = await Question.findByIdAndDelete(questionId);
-		
+
 		if (!questionData) {
 			throwErr('provided valid question id', 403);
 		}
