@@ -32,6 +32,11 @@ npm install
 </code></div></div></pre></li></ul>
 <p>(Provide usage examples or code snippets for common tasks using your API.)</p>
 <h2>Contributing</h2>
-<p>Contributions are welcome! Follow the <a target="_new" href="CONTRIBUTING.md">contribution guidelines</a> to get started.</p>
+We welcome contributions from the community. If you'd like to contribute, please follow these guidelines:
+
+Fork the repository.
+Create a new branch.
+Make your changes.
+Submit a pull request.  
 <h2>License</h2>
 <p>This project is licensed under the <a href="https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt">MIT License</a>.</p>
