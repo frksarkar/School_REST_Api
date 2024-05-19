@@ -5,32 +5,32 @@
    <h2>Table of Contents</h2>
    <ul>
       <li>
-         <a target="_new" rel="noreferrer" href="#getting-started">Getting Started</a>
+         <a target="_new" href="#getting-started">Getting Started</a>
          <ul>
-            <li><a target="_new" rel="noreferrer" href="#prerequisites">Prerequisites</a></li>
-            <li><a target="_new" rel="noreferrer" href="#installation">Installation</a></li>
-            <li><a target="_new" rel="noreferrer" href="#running-the-application">Running the Application</a></li>
+            <li><a target="_new" href="#prerequisites">Prerequisites</a></li>
+            <li><a target="_new" href="#installation">Installation</a></li>
+            <li><a target="_new" href="#running-the-application">Running the Application</a></li>
          </ul>
       </li>
       <li>
-         <a target="_new" rel="noreferrer" href="#api-endpoints">API Endpoints</a>
+         <a target="_new" href="#api-endpoints">API Endpoints</a>
          <ul>
-            <li><a target="_new" rel="noreferrer" href="#admins">Admins</a></li>
-            <li><a target="_new" rel="noreferrer" href="#academic-years">Academic Years</a></li>
-            <li><a target="_new" rel="noreferrer" href="#academic-terms">Academic Terms</a></li>
-            <li><a target="_new" rel="noreferrer" href="#class-levels">Class Levels</a></li>
-            <li><a target="_new" rel="noreferrer" href="#programs">Programs</a></li>
-            <li><a target="_new" rel="noreferrer" href="#subjects">Subjects</a></li>
-            <li><a target="_new" rel="noreferrer" href="#year-groups">Year Groups</a></li>
-            <li><a target="_new" rel="noreferrer" href="#teachers">Teachers</a></li>
-            <li><a target="_new" rel="noreferrer" href="#exams">Exams</a></li>
-            <li><a target="_new" rel="noreferrer" href="#students">Students</a></li>
-            <li><a target="_new" rel="noreferrer" href="#questions">Questions</a></li>
-            <li><a target="_new" rel="noreferrer" href="#exam-results">Exam Results</a></li>
+            <li><a target="_new" href="#admins">Admins</a></li>
+            <li><a target="_new" href="#academic-years">Academic Years</a></li>
+            <li><a target="_new" href="#academic-terms">Academic Terms</a></li>
+            <li><a target="_new" href="#class-levels">Class Levels</a></li>
+            <li><a target="_new" href="#programs">Programs</a></li>
+            <li><a target="_new" href="#subjects">Subjects</a></li>
+            <li><a target="_new" href="#year-groups">Year Groups</a></li>
+            <li><a target="_new" href="#teachers">Teachers</a></li>
+            <li><a target="_new" href="#exams">Exams</a></li>
+            <li><a target="_new" href="#students">Students</a></li>
+            <li><a target="_new" href="#questions">Questions</a></li>
+            <li><a target="_new" href="#exam-results">Exam Results</a></li>
          </ul>
       </li>
-      <li><a target="_new" rel="noreferrer" href="#contributing">Contributing</a></li>
-      <li><a target="_new" rel="noreferrer" href="#license">License</a></li>
+      <li><a target="_new" href="#contributing">Contributing</a></li>
+      <li><a target="_new" href="#license">License</a></li>
    </ul>
    <h2>Getting Started</h2>
    <h3>Prerequisites</h3>
