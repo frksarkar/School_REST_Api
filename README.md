@@ -1,5 +1,4 @@
 <div class="markdown prose w-full break-words dark:prose-invert light">
-   <hr>
    <h1>School Management REST API</h1>
    <p>Welcome to the School Management REST API project! This API is designed to manage various aspects of a school, including administrative functions, academic years, class levels, programs, subjects, teachers, students, and exams. Below you'll find details on how to set up, use, and contribute to this project.</p>
    <h2>Table of Contents</h2>
