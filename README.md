@@ -43,17 +43,17 @@
    <ol>
       <li>
          <p>Clone the repository:</p>
-         
          ```bash
             git clone https://github.com/frksarkar/school-management-api.git
             cd school-management-API
          ```
-         
       </li>
+      
       <li>
          <p>Install dependencies:</p>
-         <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div class="overflow-y-auto p-4 text-left undefined" dir="ltr"><code class="!whitespace-pre hljs language-bash">npm install
-</code></div></div></pre>
+         ```bash
+            npm install
+         ```
       </li>
       <li>
          <p>Set up environment variables. Create a <code>.env</code> file in the root directory and add the following:</p>
