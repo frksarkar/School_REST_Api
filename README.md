@@ -52,9 +52,9 @@
       </li>
       <li>
          <p>Set up environment variables. Create a ```.env``` file in the root directory and add the following:</p>
-         <code> PORT=3000
-         MONGODB_URI=mongodb://localhost:27017/school-management
-         JWT_SECRET=your_jwt_secret </code>
+         <pre><code> PORT=3000
+ MONGODB_URI=mongodb://localhost:27017/school-management
+ JWT_SECRET=your_jwt_secret </code></pre>
       </li>
    </ol>
    <h3>Running the Application</h3>
