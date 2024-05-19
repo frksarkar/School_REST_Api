@@ -36,25 +36,25 @@
    <h3>Prerequisites</h3>
    <p>Ensure you have the following installed:</p>
    <ul>
-      <li><a target="_new" rel="noreferrer" href="https://nodejs.org/">Node.js</a> (version 14 or higher)</li>
-      <li><a target="_new" rel="noreferrer" href="https://www.mongodb.com/">MongoDB</a></li>
+      <li><a target="_new" href="https://nodejs.org/">Node.js</a> (version 14 or higher)</li>
+      <li><a target="_new" href="https://www.mongodb.com/">MongoDB</a></li>
    </ul>
    <h3>Installation</h3>
    <ol>
       <li>
          <p>Clone the repository:</p>
-         <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><span>bash</span><div class="flex items-center"><span class="" data-state="closed"><button class="flex gap-1 items-center">code</button></span></div></div><div class="overflow-y-auto p-4 text-left undefined" dir="ltr"><code class="!whitespace-pre hljs language-bash">git <span class="hljs-built_in">clone</span> https://github.com/your-username/school-management-api.git
+         <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div class="overflow-y-auto p-4 text-left undefined" dir="ltr"><code class="!whitespace-pre hljs language-bash">git <span class="hljs-built_in">clone</span> https://github.com/your-username/school-management-api.git
 <span class="hljs-built_in">cd</span> school-management-api
 </code></div></div></pre>
       </li>
       <li>
          <p>Install dependencies:</p>
-         <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><span>bash</span><div class="flex items-center"><span class="" data-state="closed"><button class="flex gap-1 items-center">code</button></span></div></div><div class="overflow-y-auto p-4 text-left undefined" dir="ltr"><code class="!whitespace-pre hljs language-bash">npm install
+         <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div class="overflow-y-auto p-4 text-left undefined" dir="ltr"><code class="!whitespace-pre hljs language-bash">npm install
 </code></div></div></pre>
       </li>
       <li>
          <p>Set up environment variables. Create a <code>.env</code> file in the root directory and add the following:</p>
-         <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><span>env</span><div class="flex items-center"><span class="" data-state="closed"><button class="flex gap-1 items-center">code</button></span></div></div><div class="overflow-y-auto p-4 text-left undefined" dir="ltr"><code class="!whitespace-pre hljs language-env">PORT=3000
+         <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div class="overflow-y-auto p-4 text-left undefined" dir="ltr"><code class="!whitespace-pre hljs language-env">PORT=3000
 MONGODB_URI=mongodb://localhost:27017/school-management
 JWT_SECRET=your_jwt_secret
 </code></div></div></pre>
@@ -62,7 +62,7 @@ JWT_SECRET=your_jwt_secret
    </ol>
    <h3>Running the Application</h3>
    <p>Start the development server:</p>
-   <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><span>bash</span><div class="flex items-center"><span class="" data-state="closed"><button class="flex gap-1 items-center">code</button></span></div></div><div class="overflow-y-auto p-4 text-left undefined" dir="ltr"><code class="!whitespace-pre hljs language-bash">npm start
+   <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div class="overflow-y-auto p-4 text-left undefined" dir="ltr"><code class="!whitespace-pre hljs language-bash">npm start
 </code></div></div></pre>
    <p>The API will be running at <code>http://localhost:3000/api/v1</code>.</p>
    <h2>API Endpoints</h2>
