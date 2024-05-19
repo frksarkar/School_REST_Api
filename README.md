@@ -43,30 +43,29 @@
    <ol>
       <li>
          <p>Clone the repository:</p>
-```bash
-git clone https://github.com/frksarkar/school-management-api.git
-cd school-management-API
-```
+         <code>
+         git clone https://github.com/frksarkar/school-management-api.git
+         cd school-management-API
+         </code>
       </li>
       <li>
          <p>Install dependencies:</p>
-```bash
-npm install
-```
+         <code>
+         npm install
+         </code>
       </li>
       <li>
          <p>Set up environment variables. Create a ```.env``` file in the root directory and add the following:</p>
-```
-PORT=3000
-MONGODB_URI=mongodb://localhost:27017/school-management
-JWT_SECRET=your_jwt_secret
-```
+         <code>
+         PORT=3000
+         MONGODB_URI=mongodb://localhost:27017/school-management
+         JWT_SECRET=your_jwt_secret
+         </code>
       </li>
    </ol>
    <h3>Running the Application</h3>
    <p>Start the development server:</p>
-   <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div class="overflow-y-auto p-4 text-left undefined" dir="ltr"><code class="!whitespace-pre hljs language-bash">npm start
-</code></div></div></pre>
+   <code>npm start</code>
    <p>The API will be running at <code>http://localhost:3000/api/v1</code>.</p>
    <h2>API Endpoints</h2>
    <h3>Admins</h3>
