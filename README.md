@@ -51,7 +51,7 @@
          <pre><code> npm install </code></pre>
       </li>
       <li>
-         <p>Set up environment variables. Create a ```.env``` file in the root directory and add the following:</p>
+         <p>Set up environment variables. Create a <code>.env</code> file in the root directory and add the following:</p>
          <pre><code> PORT=3000
  MONGODB_URI=mongodb://localhost:27017/school-management
  JWT_SECRET=your_jwt_secret </code></pre>
@@ -59,7 +59,7 @@
    </ol>
    <h3>Running the Application</h3>
    <p>Start the development server:</p>
-   <code>npm start</code>
+   <pre><code>npm start</code></pre>
    <p>The API will be running at <code>http://localhost:3000/api/v1</code>.</p>
    <h2>API Endpoints</h2>
    <h3>Admins</h3>
