@@ -18,7 +18,7 @@ npm install
 <h3>Endpoints</h3>
 <p>List and describe the available API endpoints for each feature. Include request and response examples.</p>
 <p>(Example:)</p>
-<ul><li><p><strong>GET /api/academic-terms</strong>: Get a list of all academic terms.</p><pre><div class="bg-black rounded-md"><div class="p-4 overflow-y-auto"> json code<code class="!whitespace-pre hljs language-json"><span class="hljs-punctuation">{</span>
+<ul><li><p><strong>GET /api/academic-terms</strong>: Get a list of all academic terms.</p><pre><div class="bg-black rounded-md"><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-json">json code<span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
       <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
