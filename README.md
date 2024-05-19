@@ -43,24 +43,18 @@
    <ol>
       <li>
          <p>Clone the repository:</p>
-         <code>
-         git clone https://github.com/frksarkar/school-management-api.git
-         cd school-management-API
-         </code>
+         <code> git clone https://github.com/frksarkar/school-management-api.git
+         cd school-management-API </code>
       </li>
       <li>
          <p>Install dependencies:</p>
-         <code>
-         npm install
-         </code>
+         <code> npm install </code>
       </li>
       <li>
          <p>Set up environment variables. Create a ```.env``` file in the root directory and add the following:</p>
-         <code>
-         PORT=3000
+         <code> PORT=3000
          MONGODB_URI=mongodb://localhost:27017/school-management
-         JWT_SECRET=your_jwt_secret
-         </code>
+         JWT_SECRET=your_jwt_secret </code>
       </li>
    </ol>
    <h3>Running the Application</h3>
