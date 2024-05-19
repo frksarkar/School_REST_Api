@@ -43,10 +43,12 @@
    <ol>
       <li>
          <p>Clone the repository:</p>
-         ``` bash
+         
+         ```bash
             git clone https://github.com/frksarkar/school-management-api.git
-            cd school-management-api
+            cd school-management-API
          ```
+         
       </li>
       <li>
          <p>Install dependencies:</p>
