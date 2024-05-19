@@ -43,9 +43,10 @@
    <ol>
       <li>
          <p>Clone the repository:</p>
-         <pre>git clone https://github.com/frksarkar/school-management-api.git
-<span class="hljs-built_in">cd</span> school-management-api
-</code></div></div></pre>
+         ```bash
+            git clone https://github.com/frksarkar/school-management-api.git
+            cd school-management-api
+         ```
       </li>
       <li>
          <p>Install dependencies:</p>
