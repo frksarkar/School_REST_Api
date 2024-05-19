@@ -1,4 +1,4 @@
-<div class="markdown prose w-full break-words dark:prose-invert light">
+
    <h1>School Management REST API</h1>
    <p>Welcome to the School Management REST API project! This API is designed to manage various aspects of a school, including administrative functions, academic years, class levels, programs, subjects, teachers, students, and exams. Below you'll find details on how to set up, use, and contribute to this project.</p>
    <h2>Table of Contents</h2>
@@ -290,4 +290,4 @@
    <p>This project is licensed under the MIT License - see the <a target="_new" rel="noreferrer">LICENSE</a> file for details.</p>
    <hr>
    <p>Feel free to adjust any details to fit your specific project setup or preferences. This template provides a comprehensive overview and should help users understand and use your API effectively.</p>
-</div>
+
