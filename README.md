@@ -43,8 +43,9 @@
    <ol>
       <li>
          <p>Clone the repository:</p>
+         <pre>
          <code> git clone https://github.com/frksarkar/school-management-api.git
-         cd school-management-API </code>
+         cd school-management-API </code></pre>
       </li>
       <li>
          <p>Install dependencies:</p>
