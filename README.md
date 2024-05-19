@@ -48,7 +48,7 @@
       </li>
       <li>
          <p>Install dependencies:</p>
-         <code> npm install </code>
+         <pre><code> npm install </code></pre>
       </li>
       <li>
          <p>Set up environment variables. Create a ```.env``` file in the root directory and add the following:</p>
