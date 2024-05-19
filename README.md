@@ -48,7 +48,6 @@
             cd school-management-API
          ```
       </li>
-      
       <li>
          <p>Install dependencies:</p>
          ```bash
@@ -56,11 +55,12 @@
          ```
       </li>
       <li>
-         <p>Set up environment variables. Create a <code>.env</code> file in the root directory and add the following:</p>
-         <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div class="overflow-y-auto p-4 text-left undefined" dir="ltr"><code class="!whitespace-pre hljs language-env">PORT=3000
-MONGODB_URI=mongodb://localhost:27017/school-management
-JWT_SECRET=your_jwt_secret
-</code></div></div></pre>
+         <p>Set up environment variables. Create a ```.env``` file in the root directory and add the following:</p>
+         ```
+         PORT=3000
+         MONGODB_URI=mongodb://localhost:27017/school-management
+         JWT_SECRET=your_jwt_secret
+         ```
       </li>
    </ol>
    <h3>Running the Application</h3>
